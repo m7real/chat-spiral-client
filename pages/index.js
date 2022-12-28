@@ -7,6 +7,7 @@ import { FcGoogle } from "react-icons/fc";
 import Chat from "../components/Chat/Chat";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
+import Navbar from "../components/Navbar/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <Navbar />
         <Chat />
       </main>
     </>

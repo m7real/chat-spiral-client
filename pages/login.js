@@ -41,7 +41,7 @@ export default function Home() {
       })
       .catch((error) => {
         console.error(error);
-        toast.error(error.message);
+        toast.error(error.code);
       })
       .finally(() => {
         setLoading(false);
