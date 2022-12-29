@@ -1,14 +1,35 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { BsChatLeftTextFill } from "react-icons/bs";
+import { ChatContext } from "../../contexts/ChatProvider";
+import toast from "react-hot-toast";
+import UserCard from "../UserCard/UserCard";
 
-const Navbar = () => {
+const Navbar = ({ accessChat }) => {
   const { user, loading, logOut } = useContext(AuthContext);
+  const { search, searchResult, searchLoading, loadingChat, setSearch, setSearchResult, setSearchLoading, setLoadingChat } = useContext(ChatContext);
 
   const handleLogOut = () => {
     logOut()
       .then(() => {})
       .catch((error) => console.error(error));
+  };
+
+  const handleSearch = () => {
+    if (!search) {
+      return toast.error("Please provide an email address");
+    }
+    console.log(search);
+    console.log("before", searchResult);
+    setSearchLoading(true);
+    fetch(`http://localhost:5000/users?search=${search}&user=${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setSearchResult(data);
+        console.log(data);
+      })
+      .catch((err) => console.error(err))
+      .finally(setSearchLoading(false));
   };
 
   return (
@@ -21,34 +42,43 @@ const Navbar = () => {
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">
-          <button className="btn btn-ghost btn-circle">
+          <button onClick={() => setSearchResult([])} className="btn btn-ghost btn-circle">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </button>
-          <div tabIndex={0} className="mt-3 card card-compact dropdown-content w-52 bg-[rgba(255,255,255,0.12)] text-white shadow">
+          <div
+            tabIndex={0}
+            className="mt-3 card
+           card-compact dropdown-content w-52
+            lg:w-80 bg-[rgba(255,255,255,0.12)] shadow"
+          >
             <div className="card-body">
-              <span className="font-bold text-lg">8 Items</span>
-              <span className="text-info">Subtotal: $999</span>
-              <div className="card-actions">
-                <button className="btn glass btn-outline btn-block">View cart</button>
+              <input
+                onChange={(e) => setSearch(e.target.value)}
+                type="text"
+                placeholder="Search By Email"
+                className="input input-ghost w-full 
+              focus:bg-[rgba(255,255,255,0.1)] focus:text-gray-300"
+              />
+              <div className="w-full flex justify-end">
+                <button onClick={handleSearch} className="btn glass btn-outline btn-sm text-end">
+                  Go
+                </button>
               </div>
+              {searchResult?.map((user) => (
+                <UserCard key={user?._id} user={user} accessChat={accessChat}></UserCard>
+              ))}
             </div>
           </div>
         </div>
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <img src={loading ? "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg" : user?.photoURL} />
+              <img src={loading ? "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg" : user?.photoURL} alt="" />
             </div>
           </label>
           <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-[rgba(255,255,255,0.12)] text-white rounded-box w-52">
-            {/* <li>
-              <a className="justify-between">Profile</a>
-            </li>
-            <li>
-              <a>Settings</a>
-            </li> */}
             <li>
               <a onClick={handleLogOut}>Logout</a>
             </li>

@@ -3,9 +3,8 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
-import { FcGoogle } from "react-icons/fc";
 import Chat from "../components/Chat/Chat";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthProvider";
 import Navbar from "../components/Navbar/Navbar";
 
@@ -20,6 +19,10 @@ export default function Home() {
     router.push("/login");
   }
 
+  const accessChat = (email) => {
+    console.log(user?.email, email);
+  };
+
   return (
     <>
       <Head>
@@ -29,7 +32,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Navbar />
+        <Navbar accessChat={accessChat} />
         <Chat />
       </main>
     </>
