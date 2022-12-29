@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
+import { BsChatLeftTextFill } from "react-icons/bs";
 
 const Navbar = () => {
   const { user, loading, logOut } = useContext(AuthContext);
@@ -11,9 +12,12 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-[rgba(255,255,255,0.12)] shadow-md">
+    <div className="navbar bg-[rgba(255,255,255,0.12)] shadow-sm">
       <div className="flex-1">
-        <a className="btn btn-ghost normal-case text-xl font-serif text-stone-800">Chat Spiral</a>
+        <label htmlFor="chat-drawer" className="btn btn-square btn-ghost drawer-button lg:hidden">
+          <BsChatLeftTextFill className="h-full" />
+        </label>
+        <a className="normal-case text-xl font-semibold hidden lg:block ml-4">All Chats</a>
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">
@@ -27,7 +31,7 @@ const Navbar = () => {
               <span className="font-bold text-lg">8 Items</span>
               <span className="text-info">Subtotal: $999</span>
               <div className="card-actions">
-                <button className="btn btn-primary btn-block">View cart</button>
+                <button className="btn glass btn-outline btn-block">View cart</button>
               </div>
             </div>
           </div>

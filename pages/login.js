@@ -10,8 +10,8 @@ export default function Home() {
   const router = useRouter();
   const { user, loading, setLoading, signInWithGoogle } = useContext(AuthContext);
 
-  const saveUser = (name, email) => {
-    const user = { name, email };
+  const saveUser = (name, email, photoURL) => {
+    const user = { name, email, photoURL };
     fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
@@ -37,7 +37,7 @@ export default function Home() {
         const user = result.user;
         console.log(user);
         toast.success("Login Successful");
-        saveUser(user.displayName, user.email);
+        saveUser(user?.displayName, user?.email, user?.photoURL);
       })
       .catch((error) => {
         console.error(error);
