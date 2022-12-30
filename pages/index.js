@@ -19,10 +19,6 @@ export default function Home() {
     router.push("/login");
   }
 
-  const accessChat = (email) => {
-    console.log(user?.email, email);
-  };
-
   return (
     <>
       <Head>
@@ -32,7 +28,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Navbar accessChat={accessChat} />
+        <Navbar />
         <Chat />
       </main>
     </>

@@ -8,12 +8,21 @@ const ChatProvider = ({ children }) => {
   const [searchResult, setSearchResult] = useState([]);
   const [searchLoading, setSearchLoading] = useState("");
   const [loadingChat, setLoadingChat] = useState(false);
+  const [selectedChat, setSelectedChat] = useState(null);
+  const [chats, setChats] = useState([]);
+  const [fetchAgain, setFetchAgain] = useState(false);
 
   const chatInfo = {
     search,
     searchResult,
     searchLoading,
     loadingChat,
+    selectedChat,
+    chats,
+    fetchAgain,
+    setFetchAgain,
+    setChats,
+    setSelectedChat,
     setSearch,
     setSearchResult,
     setSearchLoading,

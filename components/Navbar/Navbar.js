@@ -5,9 +5,22 @@ import { ChatContext } from "../../contexts/ChatProvider";
 import toast from "react-hot-toast";
 import UserCard from "../UserCard/UserCard";
 
-const Navbar = ({ accessChat }) => {
+const Navbar = () => {
   const { user, loading, logOut } = useContext(AuthContext);
-  const { search, searchResult, searchLoading, loadingChat, setSearch, setSearchResult, setSearchLoading, setLoadingChat } = useContext(ChatContext);
+  const {
+    search,
+    searchResult,
+    searchLoading,
+    loadingChat,
+    chats,
+    setChats,
+    setSearch,
+    setSearchResult,
+    setSearchLoading,
+    setLoadingChat,
+    selectedChat,
+    setSelectedChat,
+  } = useContext(ChatContext);
 
   const handleLogOut = () => {
     logOut()
@@ -29,7 +42,41 @@ const Navbar = ({ accessChat }) => {
         console.log(data);
       })
       .catch((err) => console.error(err))
-      .finally(setSearchLoading(false));
+      .finally(() => setSearchLoading(false));
+  };
+
+  const accessChat = (chatUser) => {
+    const from = {
+      name: user?.displayName,
+      email: user?.email,
+      photoURL: user?.photoURL,
+    };
+
+    const to = {
+      name: chatUser?.name,
+      email: chatUser?.email,
+      photoURL: chatUser?.photoURL,
+    };
+
+    setLoadingChat(true);
+
+    fetch("http://localhost:5000/chats", {
+      method: "POST",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify({ from, to }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setSelectedChat(data);
+        console.log(data);
+        if (!chats.find((chat) => chat._id === data._id)) {
+          setChats([data, ...chats]);
+        }
+      })
+      .catch((err) => console.error(err))
+      .finally(() => setLoadingChat(false));
   };
 
   return (

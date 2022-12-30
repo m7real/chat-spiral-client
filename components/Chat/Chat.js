@@ -1,5 +1,7 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
+import ChatBox from "./ChatBox";
+import ChatList from "./ChatList";
 
 const Chat = () => {
   const { user, loading } = useContext(AuthContext);
@@ -9,18 +11,14 @@ const Chat = () => {
       <input id="chat-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col items-center justify-center">
         {/* <!-- Page content here --> */}
+        <ChatBox></ChatBox>
         {/* prettier-ignore */}
       </div>
       <div className="drawer-side">
         <label htmlFor="chat-drawer" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 glass">
           {/* <!-- Sidebar content here --> */}
-          <li>
-            <a>Sidebar Item 1</a>
-          </li>
-          <li>
-            <a>Sidebar Item 2</a>
-          </li>
+          <ChatList></ChatList>
         </ul>
       </div>
     </div>
