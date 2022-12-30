@@ -12,7 +12,7 @@ export default function Home() {
 
   const saveUser = (name, email, photoURL) => {
     const user = { name, email, photoURL };
-    fetch("http://localhost:5000/users", {
+    fetch("https://chat-spiral-server.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",

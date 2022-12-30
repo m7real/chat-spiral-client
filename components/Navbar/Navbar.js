@@ -35,7 +35,7 @@ const Navbar = () => {
     console.log(search);
     console.log("before", searchResult);
     setSearchLoading(true);
-    fetch(`http://localhost:5000/users?search=${search}&user=${user?.email}`)
+    fetch(`https://chat-spiral-server.vercel.app/users?search=${search}&user=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setSearchResult(data);
@@ -60,7 +60,7 @@ const Navbar = () => {
 
     setLoadingChat(true);
 
-    fetch("http://localhost:5000/chats", {
+    fetch("https://chat-spiral-server.vercel.app/chats", {
       method: "POST",
       headers: {
         "content-Type": "application/json",

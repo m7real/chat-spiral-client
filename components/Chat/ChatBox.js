@@ -2,6 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { ChatContext } from "../../contexts/ChatProvider";
 import { IoSendSharp } from "react-icons/io5";
+import { io } from "socket.io-client";
+
+const ENDPOINT = "https://chat-spiral-server.vercel.app";
+var socket, selectedChatCompare;
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
@@ -15,7 +19,7 @@ const ChatBox = () => {
   useEffect(() => {
     if (selectedChat) {
       setMessageLoading(true);
-      fetch(`http://localhost:5000/messages/${selectedChat?._id}`)
+      fetch(`https://chat-spiral-server.vercel.app/messages/${selectedChat?._id}`)
         .then((res) => res.json())
         .then((data) => {
           setMessages(data);
@@ -42,7 +46,7 @@ const ChatBox = () => {
       chat: selectedChat,
     };
 
-    fetch("http://localhost:5000/messages", {
+    fetch("https://chat-spiral-server.vercel.app/messages", {
       method: "POST",
       headers: {
         "content-Type": "application/json",
@@ -57,6 +61,11 @@ const ChatBox = () => {
       })
       .catch((err) => console.error(err));
   };
+
+  // socket
+  useEffect(() => {
+    socket = io(ENDPOINT);
+  }, [ENDPOINT]);
 
   return (
     <>
