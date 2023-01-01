@@ -26,7 +26,7 @@ const ChatList = () => {
   } = useContext(ChatContext);
 
   useEffect(() => {
-    fetch(`https://chatspiral.onrender.com/chats?email=${user?.email}`)
+    fetch(`https://chat-spiral-server-production.up.railway.app/chats?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => setChats(data))
       .catch((err) => console.error(err));

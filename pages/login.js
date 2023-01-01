@@ -12,7 +12,7 @@ export default function Home() {
 
   const saveUser = (name, email, photoURL) => {
     const user = { name, email, photoURL };
-    fetch("https://chatspiral.onrender.com/users", {
+    fetch("https://chat-spiral-server-production.up.railway.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",

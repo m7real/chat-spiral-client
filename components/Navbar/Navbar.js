@@ -33,7 +33,7 @@ const Navbar = () => {
       return toast.error("Please provide an email address");
     }
     setSearchLoading(true);
-    fetch(`https://chatspiral.onrender.com/users?search=${search}&user=${user?.email}`)
+    fetch(`https://chat-spiral-server-production.up.railway.app/users?search=${search}&user=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setSearchResult(data);
@@ -57,7 +57,7 @@ const Navbar = () => {
 
     setLoadingChat(true);
 
-    fetch("https://chatspiral.onrender.com/chats", {
+    fetch("https://chat-spiral-server-production.up.railway.app/chats", {
       method: "POST",
       headers: {
         "content-Type": "application/json",
