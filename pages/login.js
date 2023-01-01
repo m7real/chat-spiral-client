@@ -12,7 +12,7 @@ export default function Home() {
 
   const saveUser = (name, email, photoURL) => {
     const user = { name, email, photoURL };
-    fetch("https://chat-spiral-server.vercel.app/users", {
+    fetch("https://chatspiral.onrender.com/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",

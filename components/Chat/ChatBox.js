@@ -4,7 +4,7 @@ import { ChatContext } from "../../contexts/ChatProvider";
 import { IoSendSharp } from "react-icons/io5";
 import { io } from "socket.io-client";
 
-const ENDPOINT = "https://chat-spiral-server.vercel.app/";
+const ENDPOINT = "https://chatspiral.onrender.com";
 let socket, selectedChatCompare;
 
 const ChatBox = () => {
@@ -27,7 +27,7 @@ const ChatBox = () => {
   useEffect(() => {
     if (selectedChat) {
       setMessageLoading(true);
-      fetch(`https://chat-spiral-server.vercel.app/messages/${selectedChat?._id}`)
+      fetch(`https://chatspiral.onrender.com/messages/${selectedChat?._id}`)
         .then((res) => res.json())
         .then((data) => {
           setMessages(data);
@@ -70,7 +70,7 @@ const ChatBox = () => {
       chat: selectedChat,
     };
 
-    fetch("https://chat-spiral-server.vercel.app/messages", {
+    fetch("https://chatspiral.onrender.com/messages", {
       method: "POST",
       headers: {
         "content-Type": "application/json",
