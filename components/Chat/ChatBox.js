@@ -59,7 +59,6 @@ const ChatBox = () => {
   const handleSend = (event) => {
     event.preventDefault();
     const content = event.target.message.value;
-    console.log(content);
 
     const doc = {
       user: {
@@ -80,7 +79,6 @@ const ChatBox = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         event.target.reset();
         socket.emit("new message", data);
         setMessages([...messages, data]);
@@ -110,7 +108,7 @@ const ChatBox = () => {
                   <div key={m?._id} ref={lastMessageRef} className={`chat ${m?.senderEmail === user?.email ? "chat-end" : "chat-start"} m-4 mb-0`}>
                     <div className="chat-image avatar">
                       <div className="w-10 rounded-full">
-                        <img src={m?.sender?.photoURL} alt="" referrerpolicy="no-referrer" />
+                        <img src={m?.sender?.photoURL} alt="" referrerPolicy="no-referrer" />
                       </div>
                     </div>
                     <div className="chat-bubble">{m?.content}</div>

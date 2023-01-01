@@ -32,14 +32,11 @@ const Navbar = () => {
     if (!search) {
       return toast.error("Please provide an email address");
     }
-    console.log(search);
-    console.log("before", searchResult);
     setSearchLoading(true);
     fetch(`https://chat-spiral-server.vercel.app/users?search=${search}&user=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setSearchResult(data);
-        console.log(data);
       })
       .catch((err) => console.error(err))
       .finally(() => setSearchLoading(false));
@@ -70,7 +67,6 @@ const Navbar = () => {
       .then((res) => res.json())
       .then((data) => {
         setSelectedChat(data);
-        console.log(data);
         if (!chats.find((chat) => chat._id === data._id)) {
           setChats([data, ...chats]);
         }
@@ -125,7 +121,7 @@ const Navbar = () => {
               <img
                 src={loading ? "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg" : user?.photoURL}
                 alt=""
-                referrerpolicy="no-referrer"
+                referrerPolicy="no-referrer"
               />
             </div>
           </label>

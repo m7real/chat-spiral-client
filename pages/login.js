@@ -35,7 +35,6 @@ export default function Home() {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
-        console.log(user);
         toast.success("Login Successful");
         saveUser(user?.displayName, user?.email, user?.photoURL);
       })
