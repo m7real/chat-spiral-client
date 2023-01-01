@@ -6,7 +6,7 @@ const UserCard = ({ user, accessChat }) => {
     >
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar ml-2">
         <figure className="w-10 rounded-full">
-          <img src={user?.photoURL} alt="" />
+          <img src={user?.photoURL} alt="" referrerpolicy="no-referrer" />
         </figure>
       </label>
       <div className="card-body">

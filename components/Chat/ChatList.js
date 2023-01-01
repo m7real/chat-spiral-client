@@ -41,7 +41,14 @@ const ChatList = () => {
           key={chat._id}
         >
           {/* getting the other users name from the chat by excluding current logged in users */}
-          <a>{chat.users.find((u) => u?.email !== user?.email).name}</a>
+          <a>
+            <div className="chat-image avatar">
+              <div className="w-10 rounded-full">
+                <img src={chat.users.find((u) => u?.email !== user?.email)?.photoURL} alt="" referrerpolicy="no-referrer" />
+              </div>
+            </div>
+            {chat.users.find((u) => u?.email !== user?.email)?.name}
+          </a>
         </li>
       ))}
     </div>

@@ -85,7 +85,7 @@ const Navbar = () => {
         <label htmlFor="chat-drawer" className="btn btn-square btn-ghost drawer-button lg:hidden">
           <BsChatLeftTextFill className="h-full" />
         </label>
-        <a className="normal-case text-xl font-semibold hidden lg:block ml-4">All Chats</a>
+        <a className="normal-case text-xl font-semibold hidden lg:block ml-4">{selectedChat?.users?.find((u) => u?.email !== user?.email)?.name}</a>
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">
@@ -122,7 +122,11 @@ const Navbar = () => {
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <img src={loading ? "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg" : user?.photoURL} alt="" />
+              <img
+                src={loading ? "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg" : user?.photoURL}
+                alt=""
+                referrerpolicy="no-referrer"
+              />
             </div>
           </label>
           <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-[rgba(255,255,255,0.12)] text-white rounded-box w-52">
